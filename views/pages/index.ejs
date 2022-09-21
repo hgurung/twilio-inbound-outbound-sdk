@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./../partials/header'); %>
+</head>
+
+
+<div class="container">
+    <!-- log output -->
+    <div class="card text-center log-container">
+        <h3>Device log</h3>
+        <div id="log"></div>
+        <div class="btn-container">
+            <button type="button" id="btnOpenNumberPad" class="btn btn-default btn-circle btn-lg">
+                <i class="fa fa-phone fa-flip-horizontal " aria-hidden="true" style="color: green;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal dial -->
+    <%- include('./../partials/modals/dial_modal'); %>
+
+    <!-- Modal call in progress -->
+    <%- include('./../partials/modals/call_in_progress_modal'); %>
+
+    <!-- Modal incoming call -->
+    <%- include('./../partials/modals/incoming_call_modal'); %>
+
+</div>
+
+
+<footer>
+  <%- include('./../partials/footer'); %>
+</footer>
+
+</body>
+</html>

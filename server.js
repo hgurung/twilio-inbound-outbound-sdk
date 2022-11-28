@@ -57,12 +57,13 @@ app.get('/token', async (req, res) => {
 // Call or dial a number
 app.get('/handle-calls', (req, res) => {
   try {
+    console.log('req', req.query);
     if (!req.query.To) {
       throw new Error('Phone number is required');
     }
     const twiml = new VoiceResponse();
     twiml.dial({
-      callerId: process.env.TWILIO_FROM_NUMBER,
+      callerId: req.query.From,
     }, req.query.To);
     console.log('twiml', twiml.toString());
     res.writeHead(200, { 'Content-Type': 'text/xml' });
@@ -134,10 +135,10 @@ app.get('/twilio', (req, res) => {
     const twiml = new VoiceResponse();
     const dial = twiml.dial({
       callerId: req.query.From, // Owner / Phone number which is bought from twilio
-      timeout: 3, // If calls is not received for this much seconds
+      timeout: 10, // If calls is not received for this much seconds
       action: '/voice-call' // Route if call not recieved
     }, req.query.To);
-    dial.client('NON-EXISTENT-CLIENT'); // For test purpose returns No-Answer status
+    // dial.client('NON-EXISTENT-CLIENT'); // For test purpose returns No-Answer status
     console.log(twiml.toString());
     res.writeHead(200, { 'Content-Type': 'text/xml' });
     res.end(twiml.toString());
